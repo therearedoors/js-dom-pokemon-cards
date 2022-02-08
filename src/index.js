@@ -18,8 +18,9 @@ function addNameTo(cardElement, elementNo){
 function addImgTo(cardElement, elementNo){
     const img = document.createElement('img')
     const name = cardElement.querySelector('h2')
-    //img.setAttribute('id', name.innerText)
+    img.setAttribute('id', name.innerText)
     img.setAttribute('src', data[elementNo].sprites.other['official-artwork'].front_default)
+    img.setAttribute('memo', data[elementNo].sprites.other['dream_world'].front_default)
     img.className = "card--img"
     cardElement.appendChild(img)
 }
@@ -42,17 +43,20 @@ function addVersionsTo(cardElement,elementNo){
     for(let i=0;i<dataObj.length))
 }
 
-
-function toggleImg() {
-    const img = document.getElementById("Bulbasaur")
-    img.setAttribute('src', data[0].sprites.other['dream_world'].front_default)
-}
 */
+function toggleImg() {
+    const img = document.getElementById('Bulbasaur')
+    const memo = img.getAttribute('src')
+    img.setAttribute('src', img.getAttribute('memo'))
+    img.setAttribute('memo', memo)
+}
+
 
 for(let i=0;i<data.length;i++){
     card = addCardTo(pokeList)
     addNameTo(card,i)
     addImgTo(card,i)
     addStatsTo(card,i)
-    //card.setAttribute('onclick', toggleImg())
 }
+const bulba = document.getElementById("Bulbasaur")
+bulba.addEventListener('click', toggleImg)
