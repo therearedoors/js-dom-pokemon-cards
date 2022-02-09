@@ -20,7 +20,7 @@ function addImgTo(cardElement, elementNo){
     const name = cardElement.querySelector('h2')
     img.setAttribute('id', name.innerText)
     img.setAttribute('src', data[elementNo].sprites.other['official-artwork'].front_default)
-    img.setAttribute('memo', data[elementNo].sprites.other['dream_world'].front_default)
+    img.setAttribute('altimg', data[elementNo].sprites.other['dream_world'].front_default)
     img.className = "card--img"
     cardElement.appendChild(img)
 }
@@ -28,7 +28,7 @@ function addImgTo(cardElement, elementNo){
 function addStatsTo(cardElement,elementNo){
     const stats = document.createElement('ul')
     for(let i=0;i<data[elementNo].stats.length;i++){
-        dataObj = data[elementNo].stats[i]
+        const dataObj = data[elementNo].stats[i]
         const stat = document.createElement('li')
         stat.innerText = dataObj.stat.name.toUpperCase() + ': ' + dataObj["base_stat"]
         stats.appendChild(stat)
@@ -44,11 +44,11 @@ function addVersionsTo(cardElement,elementNo){
 }
 
 */
-function toggleImg() {
-    const img = document.getElementById('Bulbasaur')
+function toggleImg(click) {
+    const img = click.target
     const memo = img.getAttribute('src')
-    img.setAttribute('src', img.getAttribute('memo'))
-    img.setAttribute('memo', memo)
+    img.setAttribute('src', img.getAttribute('altimg'))
+    img.setAttribute('altimg', memo)
 }
 
 
@@ -57,6 +57,5 @@ for(let i=0;i<data.length;i++){
     addNameTo(card,i)
     addImgTo(card,i)
     addStatsTo(card,i)
+    card.addEventListener('click', toggleImg)
 }
-const bulba = document.getElementById("Bulbasaur")
-bulba.addEventListener('click', toggleImg)
